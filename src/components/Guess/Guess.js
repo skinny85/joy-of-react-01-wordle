@@ -1,8 +1,6 @@
 import { range } from '../../utils';
-import { checkGuess } from '../../game-helpers';
 
-function Guess({ guess, answer }) {
-  const guessResult = checkGuess(guess, answer);
+function Guess({ guessResult }) {
   return (
     <p className="guess">
       {range(5).map(index => (
