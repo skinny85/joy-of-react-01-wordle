@@ -1,6 +1,6 @@
 import React from 'react';
 
-function GuessInput({ addGuess }) {
+function GuessInput({ addGuess, enabled }) {
   const [guess, setGuess] = React.useState('');
 
   return (
@@ -11,6 +11,7 @@ function GuessInput({ addGuess }) {
     }}>
       <label htmlFor="guess-input">Enter guess:</label>
       <input id="guess-input" type="text"
+        disabled={!enabled}
         pattern="[a-zA-Z]{5}"
         maxLength="5"
         value={guess}
