@@ -17,10 +17,7 @@ function Game() {
     <>
       <PastGuesses guesses={guesses} />
       <GuessInput addGuess={guess => {
-        setGuesses([...guesses, {
-          guess,
-          key: crypto.randomUUID(),
-        }]);
+        setGuesses([...guesses, guess]);
       }} />
     </>
   );
