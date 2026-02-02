@@ -4,16 +4,17 @@ import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import GuessInput from '../GuessInput/GuessInput';
 import PastGuesses from '../PastGuesses/PastGuesses';
-import GameState from '../GameState/GameState';
+import WinBanner from '../Banner/WinBanner/WinBanner';
+import LoseBanner from '../Banner/LoseBanner/LoseBanner';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
 console.info({ answer });
 
-export const STATE_IN_PROGRESS = "in progress";
-export const STATE_LOST = "lost";
-export const STATE_WON = "won";
+const STATE_IN_PROGRESS = "in progress";
+const STATE_LOST = "lost";
+const STATE_WON = "won";
 
 function Game() {
   const [guesses, setGuesses] = React.useState([]);
@@ -21,7 +22,8 @@ function Game() {
 
   return (
     <>
-      <GameState gameState={gameState} guesses={guesses} answer={answer} />
+      {gameState === STATE_WON && (<WinBanner guesses={guesses} />)}
+      {gameState === STATE_LOST && (<LoseBanner answer={answer} />)}
 
       <PastGuesses guesses={guesses} answer={answer} />
 
