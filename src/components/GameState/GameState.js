@@ -1,6 +1,6 @@
 import { STATE_IN_PROGRESS, STATE_LOST, STATE_WON } from '../Game/Game';
 
-function GameState({ gameState, guessResults, answer }) {
+function GameState({ gameState, guesses, answer }) {
   if (gameState === STATE_IN_PROGRESS) {
     return;
   }
@@ -10,7 +10,7 @@ function GameState({ gameState, guessResults, answer }) {
         <div className="banner happy">
           <p>
             <strong>Congratulations!</strong>{' '}
-            Got it in <strong>{guessResults.length} guess{guessResults.length > 1 ? 'es' : ''}</strong>.
+            Got it in <strong>{guesses.length} guess{guesses.length > 1 ? 'es' : ''}</strong>.
           </p>
         </div>
       )}

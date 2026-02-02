@@ -1,7 +1,6 @@
 import React from 'react';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
-import { checkGuess } from '../../game-helpers';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import GuessInput from '../GuessInput/GuessInput';
 import PastGuesses from '../PastGuesses/PastGuesses';
@@ -17,31 +16,26 @@ export const STATE_LOST = "lost";
 export const STATE_WON = "won";
 
 function Game() {
-  const [guessResults, setGuessResults] = React.useState([]);
+  const [guesses, setGuesses] = React.useState([]);
   const [gameState, setGameState] = React.useState(STATE_IN_PROGRESS);
 
   return (
     <>
-      <GameState gameState={gameState} guessResults={guessResults} answer={answer} />
+      <GameState gameState={gameState} guesses={guesses} answer={answer} />
 
-      <PastGuesses guessResults={guessResults} />
+      <PastGuesses guesses={guesses} answer={answer} />
 
       <GuessInput enabled={gameState === STATE_IN_PROGRESS} addGuess={guess => {
-        const guessResult = checkGuess(guess, answer);
-        const newGuessResults = [...guessResults, guessResult];
-        if (winningGuess(guessResult)) {
+        const newGuesses = [...guesses, guess];
+        if (guess === answer) {
           setGameState(STATE_WON);
-        } else if (newGuessResults.length >= NUM_OF_GUESSES_ALLOWED) {
+        } else if (newGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
           setGameState(STATE_LOST);
         }
-        setGuessResults(newGuessResults);
+        setGuesses(newGuesses);
       }} />
     </>
   );
-}
-
-function winningGuess(guessResult) {
-  return guessResult.every(g => g.status === "correct");
 }
 
 export default Game;
