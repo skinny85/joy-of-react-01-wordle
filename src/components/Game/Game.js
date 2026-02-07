@@ -22,8 +22,8 @@ function Game() {
 
   return (
     <>
-      {gameState === STATE_WON && (<WinBanner guesses={guesses} />)}
-      {gameState === STATE_LOST && (<LoseBanner answer={answer} />)}
+      {gameState === STATE_WON && <WinBanner guesses={guesses} />}
+      {gameState === STATE_LOST && <LoseBanner answer={answer} />}
 
       <PastGuesses guesses={guesses} answer={answer} />
 
